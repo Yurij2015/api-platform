@@ -1,0 +1,7 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+
+app_customer_index:
+  path: /customer/index
+  controller: App\Controller\CustomerController::index
