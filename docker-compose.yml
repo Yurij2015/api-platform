@@ -7,6 +7,13 @@ services:
       - '8000:8000'
     volumes:
       - './:/app'
+    environment:
+      - SYMFONY_PROJECT_NAME=myapp
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT_NUMBER=3306
+      - MARIADB_USER=rootapi
+      - MARIADB_PASSWORD=rootapi
+      - MARIADB_DATABASE=api_platform
     depends_on:
       - mariadb
     container_name: myapp
@@ -15,6 +22,8 @@ services:
     ports:
       - "3306:3306"
     environment:
-      # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=rootapi
+      - MARIADB_PASSWORD=rootapi
+      - MARIADB_DATABASE=api_platform
     container_name: mariadb
