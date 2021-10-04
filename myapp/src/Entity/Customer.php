@@ -4,9 +4,17 @@ namespace App\Entity;
 
 use App\Repository\CustomerRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CustomerRepository::class)
+ * @ApiResource(
+ *     collectionOperations={"get"={"normalization_context"={"groups"="customer:list"}}},
+ *     itemOperations={"get"={"normalization_context"={"groups"="customer:item"}}},
+ *     order={"fullname"="DESC", "address"="ASC"},
+ *     paginationEnabled=false
+ *     )
  */
 class Customer
 {
@@ -15,6 +23,7 @@ class Customer
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
+    #[Groups(['customer:list', 'customer:item'])]
     private $id;
 
     /**
