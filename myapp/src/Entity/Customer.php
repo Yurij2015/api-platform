@@ -11,12 +11,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity(repositoryClass=CustomerRepository::class)
  * @UniqueEntity("slug")
- * @ApiResource(
- *     collectionOperations={"get"={"normalization_context"={"groups"="customer:list"}}},
- *     itemOperations={"get"={"normalization_context"={"groups"="customer:item"}}},
- *     order={"fullname"="DESC"},
- *     paginationEnabled=false
- *     )
+ * @ApiResource()
  */
 class Customer
 {
@@ -25,25 +20,21 @@ class Customer
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    #[Groups(['customer:list', 'customer:item'])]
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    #[Groups(['customer:list', 'customer:item'])]
     private $fullname;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    #[Groups(['customer:list', 'customer:item'])]
     private $address;
 
     /**
      * @ORM\Column(type="string", length=20, nullable=true)
      */
-    #[Groups(['customer:list', 'customer:item'])]
     private $phone;
 
     /**
