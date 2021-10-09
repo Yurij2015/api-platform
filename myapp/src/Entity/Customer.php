@@ -4,9 +4,14 @@ namespace App\Entity;
 
 use App\Repository\CustomerRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CustomerRepository::class)
+ * @UniqueEntity("slug")
+ * @ApiResource()
  */
 class Customer
 {
@@ -36,12 +41,6 @@ class Customer
      * @ORM\Column(type="string", length=100)
      */
     private $email;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Order::class, inversedBy="customers")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $orderitem;
 
     public function getId(): ?int
     {
@@ -92,18 +91,6 @@ class Customer
     public function setEmail(string $email): self
     {
         $this->email = $email;
-
-        return $this;
-    }
-
-    public function getOrderitem(): ?Order
-    {
-        return $this->orderitem;
-    }
-
-    public function setOrderitem(?Order $orderitem): self
-    {
-        $this->orderitem = $orderitem;
 
         return $this;
     }
