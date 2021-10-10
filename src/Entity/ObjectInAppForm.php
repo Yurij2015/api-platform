@@ -4,9 +4,11 @@ namespace App\Entity;
 
 use App\Repository\ObjectInAppFormRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * @ORM\Entity(repositoryClass=ObjectInAppFormRepository::class)
+ * @ApiResource()
  */
 class ObjectInAppForm
 {

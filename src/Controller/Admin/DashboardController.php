@@ -37,12 +37,13 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Customers', 'fas fa-list-alt', Customer::class);
-        yield MenuItem::linkToCrud('Orders', 'fa fa-code', Order::class);
-        yield MenuItem::linkToCrud('Services', 'fa fa-bars', Service::class);
-        yield MenuItem::linkToCrud('Products', 'fa fa-bars', Product::class);
+        yield MenuItem::linkToCrud('Customers', 'fas fa-users', Customer::class);
+        yield MenuItem::linkToCrud('Orders', 'fa fa-list-alt', Order::class);
+        yield MenuItem::linkToCrud('Services', 'fa fa-sort-amount-asc', Service::class);
+        yield MenuItem::linkToCrud('Products', 'fa fa-product-hunt', Product::class);
         yield MenuItem::linkToCrud('Applications', 'fa fa-bars', ApplicationForm::class);
-        yield MenuItem::linkToCrud('ObjectInAppForm.php', 'fa fa-bars', ObjectInAppForm::class);
+        yield MenuItem::linkToCrud('Object in applications', 'fa fa-object-group
+', ObjectInAppForm::class);
 
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
