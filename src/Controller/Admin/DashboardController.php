@@ -2,6 +2,9 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\ApplicationForm;
+use App\Entity\ObjectInAppForm;
+use App\Entity\Product;
 use App\Entity\Service;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -37,6 +40,10 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Customers', 'fas fa-list-alt', Customer::class);
         yield MenuItem::linkToCrud('Orders', 'fa fa-code', Order::class);
         yield MenuItem::linkToCrud('Services', 'fa fa-bars', Service::class);
+        yield MenuItem::linkToCrud('Products', 'fa fa-bars', Product::class);
+        yield MenuItem::linkToCrud('Applications', 'fa fa-bars', ApplicationForm::class);
+        yield MenuItem::linkToCrud('ObjectInAppForm.php', 'fa fa-bars', ObjectInAppForm::class);
+
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }
