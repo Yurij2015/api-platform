@@ -6,7 +6,7 @@ services:
     ports:
       - '8000:8000'
     volumes:
-      - './:/app'
+      - './:/app/myapp'
     environment:
       - SYMFONY_PROJECT_NAME=myapp
       - MARIADB_HOST=mariadb
@@ -19,6 +19,7 @@ services:
     container_name: myapp
   mariadb:
     image: docker.io/bitnami/mariadb:10.3
+    restart: always
     ports:
       - "3306:3306"
     environment:
