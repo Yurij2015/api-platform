@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,6 +38,16 @@ class Product
      * @ORM\Column(type="string", length=30)
      */
     private $prod_articul;
+
+    /**
+     * @ORM\OneToMany(targetEntity=ObjectInAppForm::class, mappedBy="product")
+     */
+    private $object_in_app_form;
+
+    public function __construct()
+    {
+        $this->object_in_app_form = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -86,6 +98,36 @@ class Product
     public function setProdArticul(string $prod_articul): self
     {
         $this->prod_articul = $prod_articul;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ObjectInAppForm[]
+     */
+    public function getObjectInAppForm(): Collection
+    {
+        return $this->object_in_app_form;
+    }
+
+    public function addObjectInAppForm(ObjectInAppForm $objectInAppForm): self
+    {
+        if (!$this->object_in_app_form->contains($objectInAppForm)) {
+            $this->object_in_app_form[] = $objectInAppForm;
+            $objectInAppForm->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeObjectInAppForm(ObjectInAppForm $objectInAppForm): self
+    {
+        if ($this->object_in_app_form->removeElement($objectInAppForm)) {
+            // set the owning side to null (unless already changed)
+            if ($objectInAppForm->getProduct() === $this) {
+                $objectInAppForm->setProduct(null);
+            }
+        }
 
         return $this;
     }

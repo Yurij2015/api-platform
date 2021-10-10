@@ -33,6 +33,16 @@ class ObjectInAppForm
      */
     private $applicationForm;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Service::class, inversedBy="object_in_app_form")
+     */
+    private $service;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="object_in_app_form")
+     */
+    private $product;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -70,6 +80,30 @@ class ObjectInAppForm
     public function setApplicationForm(?ApplicationForm $applicationForm): self
     {
         $this->applicationForm = $applicationForm;
+
+        return $this;
+    }
+
+    public function getService(): ?Service
+    {
+        return $this->service;
+    }
+
+    public function setService(?Service $service): self
+    {
+        $this->service = $service;
+
+        return $this;
+    }
+
+    public function getProduct(): ?Product
+    {
+        return $this->product;
+    }
+
+    public function setProduct(?Product $product): self
+    {
+        $this->product = $product;
 
         return $this;
     }
