@@ -46,6 +46,11 @@ class Order
      */
     private $application_form_id;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="orderitem")
+     */
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -112,6 +117,18 @@ class Order
         }
 
         $this->application_form_id = $application_form_id;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

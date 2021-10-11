@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -34,6 +36,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Order::class, mappedBy="user")
+     */
+    private $orderitem;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Role::class, inversedBy="user")
+     */
+    private $role;
+
+    public function __construct()
+    {
+        $this->orderitem = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -122,5 +139,47 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection|Order[]
+     */
+    public function getOrderitem(): Collection
+    {
+        return $this->orderitem;
+    }
+
+    public function addOrderitem(Order $orderitem): self
+    {
+        if (!$this->orderitem->contains($orderitem)) {
+            $this->orderitem[] = $orderitem;
+            $orderitem->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrderitem(Order $orderitem): self
+    {
+        if ($this->orderitem->removeElement($orderitem)) {
+            // set the owning side to null (unless already changed)
+            if ($orderitem->getUser() === $this) {
+                $orderitem->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getRole(): ?Role
+    {
+        return $this->role;
+    }
+
+    public function setRole(?Role $role): self
+    {
+        $this->role = $role;
+
+        return $this;
     }
 }
