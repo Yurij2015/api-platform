@@ -1,2 +1,2 @@
-# api
+# api, admin
 symfony
